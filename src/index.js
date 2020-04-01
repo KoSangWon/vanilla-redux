@@ -8,6 +8,7 @@ const ADD_TODO = "ADD_TODO"
 const DELETE_TODO = "DELETE_TODO";
 
 const reducer = (state = [], action) => {
+  console.log(action)
   switch(action.type){
     case ADD_TODO:
       return [];
@@ -20,17 +21,11 @@ const reducer = (state = [], action) => {
 
 const store = createStore(reducer);
 
-const createToDo = toDo => {
-  const li = document.createElement("li");
-  li.innerText = toDo;
-  ul.appendChild(li);
-};
-
 const onSubmit = e => {
   e.preventDefault();
   const toDo = input.value;
   input.value = "";
-  createToDo(toDo);
+  store.dispatch({type: ADD_TODO, text: toDo});
 };
 
 form.addEventListener("submit", onSubmit);
